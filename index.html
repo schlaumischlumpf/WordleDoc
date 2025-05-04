@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Dokumentation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/scroll-animation.js"></script>
+</head>
+<body>
+    <main>
+        <aside class="sidebar">
+            <div class="contents-header">Inhalt</div>
+            <ul class="contents-list">
+                <li><a href="#was-ist">Was ist Wordle</a></li>
+                <li><a href="#spielidee">Wie wird gespielt</a></li>
+                <li><a href="#ziel">Ziel des Spiels</a></li>
+                <li><a href="#technik">Spielmechanik</a></li>
+            </ul>
+        </aside>
+        <div class="content">
+            <h1 id="Wordle (JavaFX)" style="margin-bottom: 1.5em;">Wordle Dokumentation - Spielidee</h1>
+
+
+            <h2 id="was-ist">Was ist Wordle?</h2>
+                <p>
+                    Bei dem Spiel „Wordle“ handelt es sich um ein Wortratespiel, bei dem der Spieler versucht, ein geheimes Wort mit fünf Buchstaben innerhalb von sechs Versuchen
+                    zu erraten. Das ursprüngliche Wordle wurde im Jahr 2021 von Josh Wardle als browserbasiertes Rätsel konzipiert. <br>
+                    Im Gegensatz zu Kreuzworträtseln, bei denen dem Spieler oftmals Hinweise für das gesuchte Wort gegeben werden, verzichtet Wordle auf derartige Hilfestellungen.
+                </p>
+            
+            <h2 id="spielidee">Wie wird gespielt?</h2>
+                <p>
+                    Jedes Spiel beginnt damit, dass der Spieler ein beliebiges fünfbuchstabiges Wort in die erste Zeile des Spielfeldes einträgt. 
+                    Im Anschluss daran wird seine Eingabe evaluiert und die Buchstaben farblich hinterlegt. <br> 
+                    
+                    Dabei sind die Farben wie folgt definiert:
+
+                    <ul>
+                        <li>Grau: Der eingegebene Buchstabe kommt nicht im gesuchten Wort vor.</li>
+                        <li>Gelb: Der eingegebene Buchstabe kommt im gesuchten Wort vor, befindet sich aktuell jedoch nicht an der richtigen Stelle.</li>
+                        <li>Grün: Der eingegebene Buchstabe kommt im gesuchten Wort vor und befindet sich an der richtigen Stelle.</li>
+                    </ul>
+                </p>
+                    
+            <h2 id="ziel">Ziel des Spiels</h2>
+                <p>
+                    Das Ziel des Spiels ist es, das gesuchte Wort mit so wenig Versuchen wie möglich zu erraten.
+                </p>
+            
+            <h2 id="technik">Spielmechanik</h2>
+                <p>
+                    Wie das Spiel genau funktioniert, ist unter folgendem <a href="html/spielmechanik.html">Link</a> dokumentiert.
+                </p>
+        </div>
+    </main>
+</body>
+</html>

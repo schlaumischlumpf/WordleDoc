@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spielmechanik</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="../js/scroll-animation.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <main>
+        <aside class="sidebar">
+            <div class="contents-header">Inhalt</div>
+            <ul class="contents-list">
+                <li><a href="#Einleitung">Einleitung</a></li>
+                <li><a href="#checkAlgo">Prüfalgorithmus</a></li>
+                <li><a href="#Implementierung-Spielfeld">Implementierung des Spielfeldes</a></li>
+            </ul>
+        </aside>
+        <div class="content">
+            <h1 id="Wordle (JavaFX)" style="margin-bottom: 1.5em;">Wordle Dokumentation - Spielmechanik</h1>
+            
+            <h2 id="Einleitung">Einleitung</h2>
+                <p>
+                    Diese Dokumentation erklärt die grundlegende Funktionsweise unserer Wordle-Implementierung, mit Fokus auf die Spielmechanik, die Benutzeroberfläche (UI) und die Wortprüfungsfunktionen.
+                </p>
+
+            <h2 id="checkAlgo">Algorithmus für die Wortüberprüfung</h2>
+                <p>
+                    Der Kern des Spiels ist der Algorithmus, der das eingegebene Wort mit dem Zielwort vergleicht. Dieser befindet sich in der CheckAlgo-Klasse:
+                </p>
+                <pre><code class="language-java">
+                    public static Color[] pruefeWort(String eingabe, String zielwort) {
+                        // Konvertierung der Eingabe und des Zielwortes in Großbuchstaben
+                        eingabe = eingabe.toUpperCase();
+                        zielwort = zielwort.toUpperCase();
+                    
+                        // Speicherung der Länge des Zielwortes → Verwendung für Dimensionierung des Arrays
+                        int laenge = zielwort.length();
+                    
+                        // Array, das die Farben für die Übereinstimmungen speichert
+                        Color[] farben = new Color[laenge];
+                    
+                        // Hilfsarray, um zu verfolgen, welche Buchstaben im Zielwort bereits verwendet wurden
+                        boolean[] zielwortBenutzt = new boolean[laenge];
+                    
+                        // Erster Durchgang: Finden von exakten Übereinstimmungen → Grün markieren
+                        for (int i = 0; i < laenge; i++) {
+                            if (i < eingabe.length() && eingabe.charAt(i) == zielwort.charAt(i)) {
+                                farben[i] = Color.web("#6aaa64"); // Grün für richtige Position
+                                zielwortBenutzt[i] = true;
+                            } else {
+                                farben[i] = Color.web("#787c7e"); // Grau für falsche Buchstaben
+                            }
+                        }
+                    
+                        // Zweiter Durchgang: Finden von Buchstaben an falscher Position → Gelb markieren
+                        for (int i = 0; i < eingabe.length() && i < laenge; i++) {
+                            if (farben[i].equals(Color.web("#6aaa64"))) {
+                                continue; // Bereits als korrekt markiert
+                            }
+                    
+                            char buchstabe = eingabe.charAt(i);
+                            boolean gefunden = false;
+                    
+                            // Suche nach diesem Buchstaben im Zielwort
+                            for (int j = 0; j < laenge; j++) {
+                                if (!zielwortBenutzt[j] && zielwort.charAt(j) == buchstabe) {
+                                    farben[i] = Color.web("#c9b458"); // Gelb für richtige Buchstaben an falscher Stelle
+                                    zielwortBenutzt[j] = true;
+                                    gefunden = true;
+                                    break;
+                                }
+                            }
+                        }
+                    
+                        return farben;
+                    }
+                </code></pre>
+
+                <p>
+                    Die Wortüberprüfung erfolgt dabei in zwei Durchgängen:
+                </p>
+                    <ol>
+                        <li><b>Erster Durchgang:</b> Überprüft jeden Buchstaben des eingegebenen Wortes darauf, ob er an der richtigen Position steht. Wenn ja, wird der Buchstabe grün markiert und als &bdquo;verwendet&ldquo; im Zielwort gekennzeichnet.</li>
+                        <li><b>Zweiter Durchgang:</b> Für jeden nicht-grünen Buchstaben wird geprüft, ob er an einer anderen Stelle im Zielwort vorkommt. Wenn ja und der entsprechende Buchstabe im Zielwort noch nicht &bdquo;verwendet&ldquo; wurde, wird er gelb markiert.</li>
+                    </ol>
+                <p>
+                    Wichtig hierbei ist, dass ein Buchstabe im Zielwort nur einmal &bdquo;verwendet&ldquo; werden kann. Das dient dazu, doppelte Markierungen zu vermeiden. Zum Beispiel, wenn das Zielwort &bdquo;Wagen&ldquo; ist und die Eingabe &bdquo;Lesen&ldquo; lautet, wird nur das erste &bdquo;E&ldquo; gelb markiert, da im Zielwort nur ein &bdquo;E&ldquo; vorkommt.
+                </p>
+
+            <h2 id="Implementierung-Spielfeld">Implementierung des Spielfeldes</h2>
+                <p>
+                    Das Spielfeld besteht aus einer Matrix mit Labeln, die in GameField.java implementiert sind:
+                </p>
+                <pre><code>
+                    public GameField(int rows) {
+                        super(10);
+                        this.setAlignment(Pos.CENTER);
+                    
+                        this.rows = rows;
+                        GridPane grid = new GridPane();
+                        grid.setHgap(5);
+                        grid.setVgap(5);
+                        grid.setAlignment(Pos.CENTER);
+                    
+                        // Zellen erstellen
+                        cells = new Label[rows][5];
+                        for (int row = 0; row < rows; row++) {
+                            for (int col = 0; col < 5; col++) {
+                                Label cell = new Label("");
+                                cell.setPrefSize(50, 50);
+                                cell.setAlignment(Pos.CENTER);
+                                cell.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+                                cell.setTextFill(Color.BLACK);
+                                // Styling für Zellen
+                                cell.setStyle("-fx-background-color: white; -fx-border-color: #d3d6da; -fx-border-width: 2;");
+                                grid.add(cell, col, row);
+                                cells[row][col] = cell;
+                            }
+                        }
+                    
+                        // Hervorheben des ersten Kästchens
+                        highlightCurrentCell();
+                    }
+                </code></pre>
+
+                <p>
+                    Die GameField-Klasse erstellt ein Raster mit einer vom Spielmodus abhängigen Anzahl von Zeilen und 5 Spalten (für die 5 Buchstaben eines Wortes). Jedes Feld (Zelle) ist ein Label-Element, das einen Buchstaben anzeigen und farblich markiert werden kann.
+                    Die Methode highlightCurrentCell() hebt das aktuell aktive Feld hervor, in das der nächste Buchstabe eingegeben wird. Dies bietet dem Benutzer eine visuelle Rückmeldung über die aktuelle Eingabeposition.
+                </p>
+        </div>
+    </main>
+</body>
+</html>
