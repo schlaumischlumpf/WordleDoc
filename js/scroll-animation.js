@@ -33,13 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     top: targetSection.offsetTop - 80, // Offset für Header-Höhe
                     behavior: 'smooth'
                 });
-                
-                // Visuelles Feedback - Highlight-Animation
-                targetSection.classList.add('section-highlight');
-                setTimeout(() => {
-                    targetSection.classList.remove('section-highlight');
-                    scrolling = false;
-                }, 2000);
             }
         });
     });

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - Wordle Dokumentation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'crimson': ['Crimson Text', 'serif'],
+                        'roboto-mono': ['Roboto Mono', 'monospace'],
+                        'linux-libertine': ['Linux Libertine', 'serif']
+                    },
+                    colors: {
+                        'wiki-blue': '#0645ad',
+                        'wiki-blue-hover': '#0b0080',
+                        'wiki-border': '#a2a9b1',
+                        'wiki-sidebar': '#f8f9fa',
+                        'wiki-infobox': '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="../js/scroll-animation.js"></script>
+    
+    <style>
+        /* Section Highlight Animation */
+        .section-highlight {
+            animation: highlightPulse 2s ease-in-out;
+        }
+        
+        @keyframes highlightPulse {
+            0% { background-color: transparent; }
+            25% { background-color: rgba(59, 130, 246, 0.1); }
+            75% { background-color: rgba(59, 130, 246, 0.1); }
+            100% { background-color: transparent; }
+        }
+        
+        .dark .section-highlight {
+            animation: highlightPulseDark 2s ease-in-out;
+        }
+        
+        @keyframes highlightPulseDark {
+            0% { background-color: transparent; }
+            25% { background-color: rgba(147, 197, 253, 0.1); }
+            75% { background-color: rgba(147, 197, 253, 0.1); }
+            100% { background-color: transparent; }
+        }
+        
+        /* Active sidebar link styling */
+        .contents-list a.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .dark .contents-list a.active {
+            background-color: #60a5fa;
+            color: #1f2937;
+        }
+    </style>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Dark Mode Toggle mit Material Icons -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+        <span class="material-icons hidden dark:block text-yellow-400">light_mode</span>
+        <span class="material-icons block dark:hidden text-gray-700">dark_mode</span>
+    </button>
+
+    <main class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="sidebar fixed top-0 left-0 w-64 h-screen bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300" id="sidebar">
+            <div class="p-6">
+                <div class="contents-header text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 font-roboto-mono tracking-wide">
+                    Inhalt
+                </div>
+                <ul class="contents-list space-y-2">
+                    <li><a href="#disclaimer" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Disclaimer</a></li>
+                    <li><a href="#datenschutz" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Datenschutz</a></li>
+                    <li><a href="#externe-dienste" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Externe Dienste</a></li>
+                    <li><a href="#erstellung" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Website-Erstellung</a></li>
+                    <li><a href="#haftung" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Haftungsausschluss</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar Overlay -->
+        <div class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30 hidden" id="sidebar-overlay"></div>
+
+        <!-- Mobile Sidebar Toggle -->
+        <button class="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" id="sidebar-toggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+        <!-- Content -->
+        <div class="content flex-1 lg:ml-64 p-6 lg:p-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <a href="../index.html" class="hover:text-blue-600 dark:hover:text-blue-400">Startseite</a>
+                    <svg class="mx-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="font-medium text-gray-700 dark:text-gray-300">Disclaimer</span>
+                </div>
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Disclaimer & Datenschutz</h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-blue-600 to-purple-600 rounded mb-4"></div>
+            </div>
+
+            <!-- Disclaimer Section -->
+            <section id="disclaimer" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">1</span>
+                    Disclaimer
+                </h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        Diese Website dient ausschließlich zu Bildungs- und Dokumentationszwecken. Sie wurde im Rahmen eines Informatikprojekts erstellt und dokumentiert die Funktionsweise des Wordle-Spiels.
+                    </p>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Für die Erstellung dieser Dokumentationsseite wurde auch die Nutzung von KI hinzugezogen.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Datenschutz Section -->
+            <section id="datenschutz" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-green-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">2</span>
+                    Datenschutz
+                </h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        Diese Website speichert alle Daten lokal im Browser, um Theme-Präferenzen (Hell-/Dunkelmodus) zu merken. Es werden keine persönlichen Daten an externe Server übertragen oder gespeichert.
+                    </p>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">Lokale Datenspeicherung</h3>
+                    <ul class="list-disc ml-6 text-gray-700 dark:text-gray-300 space-y-2">
+                        <li><strong>localStorage:</strong> Speichert die Theme-Einstellung (hell/dunkel)</li>
+                        <li><strong>Keine Cookies:</strong> Diese Website verwendet keine Cookies</li>
+                        <li><strong>Keine Tracking-Tools:</strong> Es wird kein Google Analytics oder ähnliches verwendet</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Externe Dienste Section -->
+            <section id="externe-dienste" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-yellow-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">3</span>
+                    Externe Dienste
+                </h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        Diese Website nutzt die folgenden externen Dienste über CDN (Content Delivery Network):
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center">
+                                <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
+                                Tailwind CSS
+                            </h4>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                                <strong>Anbieter:</strong> Tailwind Labs Inc.
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                                <strong>Zweck:</strong> CSS-Framework für das Website-Design
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                <strong>Datenschutz:</strong> <a href="https://tailwindcss.com/privacy" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank">tailwindcss.com/privacy</a>
+                            </p>
+                        </div>
+                        
+                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 flex items-center">
+                                <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                                Google Material Icons
+                            </h4>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                                <strong>Anbieter:</strong> Google LLC
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-2">
+                                <strong>Zweck:</strong> Icon-Schriftarten für die Benutzeroberfläche
+                            </p>
+                            <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                <strong>Datenschutz:</strong> <a href="https://policies.google.com/privacy" class="text-blue-600 dark:text-blue-400 hover:underline" target="_blank">policies.google.com/privacy</a>
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 p-4 bg-yellow-50 dark:bg-yellow-900/30 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                        <div class="flex items-start">
+                            <span class="material-icons text-yellow-600 dark:text-yellow-400 mr-2 text-lg">warning</span>
+                            <div>
+                                <h4 class="font-semibold text-yellow-800 dark:text-yellow-200 mb-1">Wichtiger Hinweis</h4>
+                                <p class="text-yellow-700 dark:text-yellow-300 text-sm">
+                                    Durch das Laden externer Ressourcen von CDNs kann die IP-Adresse an die jeweiligen Anbieter übertragen werden. Dies ist technisch notwendig für die Bereitstellung der Dienste.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Website-Erstellung Section -->
+            <section id="erstellung" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-purple-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">4</span>
+                    Website-Erstellung
+                </h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Technische Umsetzung</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        Diese Website wurde vollständig mit modernen Webtechnologien erstellt und nutzt keine serverseitigen Frameworks oder Datenbanken.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Frontend-Technologien</h4>
+                            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+                                    HTML5 für die Struktur
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                    Tailwind CSS für das Styling
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-yellow-500 rounded-full mr-3"></span>
+                                    Vanilla JavaScript für Interaktivität
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                                    Highlight.js für Code-Hervorhebung
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-3">Design-Prinzipien</h4>
+                            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-indigo-500 rounded-full mr-3"></span>
+                                    Responsive Design
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-purple-500 rounded-full mr-3"></span>
+                                    Dark/Light Mode
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-pink-500 rounded-full mr-3"></span>
+                                    Barrierefreiheit
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-red-500 rounded-full mr-3"></span>
+                                    Schnelle Ladezeiten
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-700">
+                        <h4 class="font-semibold text-blue-800 dark:text-blue-200 mb-2">Entwicklungsumgebung</h4>
+                        <p class="text-blue-700 dark:text-blue-300 text-sm">
+                            Diese Website wurde mit Visual Studio Code entwickelt und nutzt Git für die Versionsverwaltung. 
+                            Alle Dateien werden lokal gespeichert und es findet keine automatische Datenübertragung statt.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Haftungsausschluss Section -->
+            <section id="haftung" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-red-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">5</span>
+                    Haftungsausschluss
+                </h2>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Inhaltliche Verantwortung</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                        Die Inhalte dieser Website wurden sorgfältig erstellt und geprüft. Eine Haftung oder Garantie für die Aktualität, 
+                        Richtigkeit und Vollständigkeit der zur Verfügung gestellten Informationen kann jedoch nicht übernommen werden.
+                    </p>
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-3">Bildungszweck</h3>
+                    <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                        Diese Website dient ausschließlich Bildungszwecken und stellt keine kommerzielle Nutzung des Wordle-Konzepts dar. 
+                        Alle Rechte am ursprünglichen Wordle-Spiel liegen bei den jeweiligen Rechteinhabern.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', currentTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            html.classList.toggle('dark', !isDark);
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Mobile sidebar toggle
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarOverlay.classList.toggle('hidden');
+        });
+        
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const backToTopButton = document.getElementById('back-to-top');
+        
+            if (backToTopButton) {
+                // Button anzeigen/verstecken basierend auf Scroll-Position
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        backToTopButton.classList.remove('opacity-0', 'invisible');
+                        backToTopButton.classList.add('opacity-100', 'visible');
+                    } else {
+                        backToTopButton.classList.add('opacity-0', 'invisible');
+                        backToTopButton.classList.remove('opacity-100', 'visible');
+                    }
+                });
+
+                // Smooth scroll nach oben
+                backToTopButton.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Code Highlighting initialisieren
+            if (typeof hljs !== 'undefined') {
+                hljs.highlightAll();
+            }
+        });
+    </script>
+
+    <!-- "Zurück nach oben" Button für lange Seiten -->
+    <div class="fixed bottom-8 right-8">
+        <button id="back-to-top" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white shadow-lg transition-all hover:shadow-xl">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+            </svg>
+        </button>
+    </div>
+</body>
+</html>

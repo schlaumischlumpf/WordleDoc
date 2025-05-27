@@ -1,5 +1,53 @@
 /* Wikipedia-style CSS */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+/* Schriftarten einbinden */
+@font-face {
+    font-family: 'Crimson Text';
+    src: url('../fonts/Crimson_Text/CrimsonText-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Crimson Text';
+    src: url('../fonts/Crimson_Text/CrimsonText-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Crimson Text';
+    src: url('../fonts/Crimson_Text/CrimsonText-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('../fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 900; /* Unterstützt alle Gewichte von 100 bis 900 */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto Mono';
+    src: url('../fonts/Roboto_Mono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype-variations');
+    font-weight: 100 900; /* Unterstützt alle Gewichte von 100 bis 900 */
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url('../fonts/Linux_Libertine/LinLibertine_R.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     --main-bg-color: #ffffff;
     --sidebar-bg-color: #f8f9fa;
@@ -10,6 +58,8 @@
     --border-color: #a2a9b1;
     --header-bg-color: #f8f9fa;
     --infobox-bg-color: #f8f9fa;
+    --inline-code-bg: #e0e0e0;
+    --inline-code-color: #000000;
 }
 
 * {
@@ -18,12 +68,28 @@
     box-sizing: border-box;
 }
 
+/* Inline Code als eigenes HTML-Element */
+icode {
+    font-family:monospace;
+    font-size: small;
+    background-color: var(--inline-code-bg);
+    color: var(--inline-code-color);
+    padding: 3px 4px;
+    border-radius: 4px;
+    font-weight: 500;
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+
 body {
-    font-family: "Crimson Text";
+    font-family: "Segoe UI", "Roboto Mono", "Crimson Text", sans-serif;
     line-height: 1.6;
     color: var(--main-text-color);
     background-color: var(--main-bg-color);
-    font-size: 1.2em;
+    font-size: medium;
     margin: 0;
     overflow-x: hidden; /* Verhindert horizontales Scrollen */
 }
@@ -102,25 +168,25 @@ main {
     color: #202122;
     text-decoration: none;
     font-family: "Roboto Mono";
-    font-size: 0.8em;
+    font-size: 0.9em;
     font-weight: 400;
+}
+
+contents-list ul {
+    margin-left: 1rem;
+    list-style-type: none;
 }
 
 .contents-list a:hover {
     color: blueviolet;
 }
 
-.contents-list a.active {
+contents-list a.active {
     font-weight: bold;
     color: black;
     border-left: 3px solid rgb(191, 223, 191);
     padding-left: 8px;
     margin-left: -8px;
-}
-
-contents-list ul {
-    margin-left: 1rem;
-    list-style-type: none;
 }
 
 /* Inhalt entsprechend korrigiert */
@@ -152,6 +218,7 @@ h2 {
 }
 
 p {
+    font-size: medium;
     margin-bottom: 0.75rem;
 }
 
@@ -178,18 +245,13 @@ code {
     text-align: left;
     display: block;
     font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace;	
-    font-size: 14px;
+    font-size: 1.2em;
 }
   
 .hljs {
     background: transparent;
 }
 
-pre code {
-    padding-left: 0 !important; /* Überschreibt highlight.js Padding */
-    margin-left: -140px; /* Korrigiert die Einrückung im HTML */
-    box-sizing: border-box;
-}
 
 /* Lists */
 .feature-list {
@@ -217,7 +279,7 @@ pre code {
     margin: 0 0 1rem 1rem;
     padding: 0.25rem;
     width: 275px;
-    font-size: 0.9rem;
+    font-size: medium;
     line-height: 1.4;
 }
 
@@ -225,7 +287,7 @@ pre code {
     text-align: center;
     font-weight: normal;
     padding: 0.25rem;
-    font-size: 1rem;
+    font-size: large;
     font-family: 'Linux Libertine', 'Georgia', 'Times', serif;
 }
 

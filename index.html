@@ -4,56 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle Dokumentation</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'crimson': ['Crimson Text', 'serif'],
+                        'roboto-mono': ['Roboto Mono', 'monospace'],
+                        'linux-libertine': ['Linux Libertine', 'serif']
+                    },
+                    colors: {
+                        'wiki-blue': '#0645ad',
+                        'wiki-blue-hover': '#0b0080',
+                        'wiki-border': '#a2a9b1',
+                        'wiki-sidebar': '#f8f9fa',
+                        'wiki-infobox': '#f8f9fa'
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/font-awesome.css">
     <script src="js/scroll-animation.js"></script>
+    
+    <style>
+        /* Section Highlight Animation */
+        .section-highlight {
+            animation: highlightPulse 2s ease-in-out;
+        }
+        
+        @keyframes highlightPulse {
+            0% { background-color: transparent; }
+            25% { background-color: rgba(59, 130, 246, 0.1); }
+            75% { background-color: rgba(59, 130, 246, 0.1); }
+            100% { background-color: transparent; }
+        }
+        
+        .dark .section-highlight {
+            animation: highlightPulseDark 2s ease-in-out;
+        }
+        
+        @keyframes highlightPulseDark {
+            0% { background-color: transparent; }
+            25% { background-color: rgba(147, 197, 253, 0.1); }
+            75% { background-color: rgba(147, 197, 253, 0.1); }
+            100% { background-color: transparent; }
+        }
+        
+        /* Active sidebar link styling */
+        .contents-list a.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        
+        .dark .contents-list a.active {
+            background-color: #60a5fa;
+            color: #1f2937;
+        }
+    </style>
 </head>
-<body>
-    <main>
-        <aside class="sidebar">
-            <div class="contents-header">Inhalt</div>
-            <ul class="contents-list">
-                <li><a href="#was-ist">Was ist Wordle</a></li>
-                <li><a href="#spielidee">Wie wird gespielt</a></li>
-                <li><a href="#ziel">Ziel des Spiels</a></li>
-                <li><a href="#technik">Spielmechanik</a></li>
-            </ul>
+<body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Dark Mode Toggle mit Material Icons -->
+    <button id="theme-toggle" class="fixed top-4 right-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+        <span class="material-icons hidden dark:block text-yellow-400">light_mode</span>
+        <span class="material-icons block dark:hidden text-gray-700">dark_mode</span>
+    </button>
+
+    <!-- Alternative Struktur aus spielmechanik.html -->
+    <main class="flex min-h-screen">
+        <!-- Sidebar (wie gehabt) -->
+        <aside class="sidebar fixed top-0 left-0 w-64 h-screen bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300" id="sidebar">
+            <div class="p-6">
+                <div class="contents-header text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 font-roboto-mono tracking-wide">
+                    Inhalt
+                </div>
+                <ul class="contents-list space-y-2">
+                    <li><a href="#was-ist" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Was ist Wordle</a></li>
+                    <li><a href="#spielidee" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Wie wird gespielt</a></li>
+                    <li><a href="#ziel" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Ziel des Spiels</a></li>
+                    <li><a href="#technik" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Spielmechanik</a></li>
+                    </ul>
+                    
+                    <!-- Bottom positioned item -->
+                    <div class="absolute bottom-6 left-6 right-6">
+                        <a href="html/disclaimer.html" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Disclaimer</a>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Mobile Sidebar Overlay -->
+            <div class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30 hidden" id="sidebar-overlay"></div>
+
+            <!-- Mobile Sidebar Toggle -->
+            <button class="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" id="sidebar-toggle">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button></div>
+                </ul>
+            </div>
         </aside>
-        <div class="content">
-            <h1 id="Wordle (JavaFX)" style="margin-bottom: 1.5em;">Wordle Dokumentation - Spielidee</h1>
 
+        <!-- Mobile Sidebar Overlay -->
+        <div class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-30 hidden" id="sidebar-overlay"></div>
 
-            <h2 id="was-ist">Was ist Wordle?</h2>
-                <p>
-                    Bei dem Spiel „Wordle“ handelt es sich um ein Wortratespiel, bei dem der Spieler versucht, ein geheimes Wort mit fünf Buchstaben innerhalb von sechs Versuchen
+        <!-- Mobile Sidebar Toggle -->
+        <button class="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" id="sidebar-toggle">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+
+        <!-- Content mit angepasstem Margin -->
+        <div class="content flex-1 lg:ml-64 p-6 lg:p-8">
+            <!-- Inhalt -->
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Spielidee</h1>
+                <div class="h-1 w-32 bg-gradient-to-r from-blue-600 to-purple-600 rounded mb-4"></div>
+            </div>
+
+            <section id="was-ist" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">1</span>
+                    Was ist Wordle?
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Bei dem Spiel „Wordle" handelt es sich um ein Wortratespiel, bei dem der Spieler versucht, ein geheimes Wort mit fünf Buchstaben innerhalb von sechs Versuchen
                     zu erraten. Das ursprüngliche Wordle wurde im Jahr 2021 von Josh Wardle als browserbasiertes Rätsel konzipiert. <br>
                     Im Gegensatz zu Kreuzworträtseln, bei denen dem Spieler oftmals Hinweise für das gesuchte Wort gegeben werden, verzichtet Wordle auf derartige Hilfestellungen.
                 </p>
+            </section>
             
-            <h2 id="spielidee">Wie wird gespielt?</h2>
-                <p>
+            <section id="spielidee" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-green-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">2</span>
+                    Wie wird gespielt?
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                     Jedes Spiel beginnt damit, dass der Spieler ein beliebiges fünfbuchstabiges Wort in die erste Zeile des Spielfeldes einträgt. 
-                    Im Anschluss daran wird seine Eingabe evaluiert und die Buchstaben farblich hinterlegt. <br> 
-                    
-                    Dabei sind die Farben wie folgt definiert:
-
-                    <ul>
-                        <li>Grau: Der eingegebene Buchstabe kommt nicht im gesuchten Wort vor.</li>
-                        <li>Gelb: Der eingegebene Buchstabe kommt im gesuchten Wort vor, befindet sich aktuell jedoch nicht an der richtigen Stelle.</li>
-                        <li>Grün: Der eingegebene Buchstabe kommt im gesuchten Wort vor und befindet sich an der richtigen Stelle.</li>
-                    </ul>
+                    Im Anschluss daran wird seine Eingabe evaluiert und die Buchstaben farblich hinterlegt.
                 </p>
+                
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">Farbliche Kennzeichnung</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    Dabei sind die Farben wie folgt definiert:
+                </p>
+
+                <ul class="space-y-2 mb-6">
+                    <li class="flex items-center text-gray-700 dark:text-gray-300">
+                        <span class="w-4 h-4 bg-gray-400 dark:bg-gray-500 rounded-full mr-3"></span>
+                        <span>Grau: Der eingegebene Buchstabe kommt nicht im gesuchten Wort vor.</span>
+                    </li>
+                    <li class="flex items-center text-gray-700 dark:text-gray-300">
+                        <span class="w-4 h-4 bg-yellow-400 dark:bg-yellow-500 rounded-full mr-3"></span>
+                        <span>Gelb: Der eingegebene Buchstabe kommt im gesuchten Wort vor, befindet sich aktuell jedoch nicht an der richtigen Stelle.</span>
+                    </li>
+                    <li class="flex items-center text-gray-700 dark:text-gray-300">
+                        <span class="w-4 h-4 bg-green-400 dark:bg-green-500 rounded-full mr-3"></span>
+                        <span>Grün: Der eingegebene Buchstabe kommt im gesuchten Wort vor und befindet sich an der richtigen Stelle.</span>
+                    </li>
+                </ul>
+            </section>
                     
-            <h2 id="ziel">Ziel des Spiels</h2>
-                <p>
+            <section id="ziel" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-yellow-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">3</span>
+                    Ziel des Spiels
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                     Das Ziel des Spiels ist es, das gesuchte Wort mit so wenig Versuchen wie möglich zu erraten.
                 </p>
+            </section>
             
-            <h2 id="technik">Spielmechanik</h2>
-                <p>
-                    Wie das Spiel genau funktioniert, ist unter folgendem <a href="html/spielmechanik.html">Link</a> dokumentiert.
+            <section id="technik" class="mb-10 scroll-mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
+                    <span class="bg-purple-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">4</span>
+                    Spielmechanik
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                    Wie das Spiel genau funktioniert, ist unter folgendem <a href="html/spielmechanik.html" class="text-blue-600 dark:text-blue-400 hover:underline">Link</a> dokumentiert.
                 </p>
+            </section>
         </div>
     </main>
+
+    <!-- Optionaler Transparenz-Hinweis -->
+<div id="privacy-notice" class="fixed bottom-4 left-4 right-4 bg-blue-50 dark:bg-blue-900/90 border border-blue-200 dark:border-blue-700 rounded-lg p-4 shadow-lg z-50 hidden">
+    <div class="flex items-start">
+        <span class="material-icons text-blue-600 dark:text-blue-400 mr-2 text-lg flex-shrink-0">info</span>
+        <div class="flex-1">
+            <p class="text-sm text-blue-800 dark:text-blue-200">
+                Diese Website speichert die Theme-Einstellung lokal im Browser. Es werden keine Cookies gespeichert oder Daten an Dritte übertragen.
+            </p>
+            <button id="dismiss-notice" class="mt-2 text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 text-sm font-medium">
+                Verstanden
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Transparenz-Hinweis
+    document.addEventListener('DOMContentLoaded', () => {
+        const privacyNotice = document.getElementById('privacy-notice');
+        const dismissButton = document.getElementById('dismiss-notice');
+        
+        // Zeige Hinweis nur beim ersten Besuch
+        if (!localStorage.getItem('privacy-notice-seen')) {
+            setTimeout(() => {
+                privacyNotice.classList.remove('hidden');
+            }, 3000);
+        }
+        
+        dismissButton.addEventListener('click', () => {
+            privacyNotice.classList.add('hidden');
+            localStorage.setItem('privacy-notice-seen', 'true');
+        });
+    });
+</script>
+
+    <script>
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.classList.toggle('dark', currentTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const isDark = html.classList.contains('dark');
+            html.classList.toggle('dark', !isDark);
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        });
+
+        // Mobile sidebar toggle
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarOverlay.classList.toggle('hidden');
+        });
+        
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        });
+    </script>
 </body>
 </html>
