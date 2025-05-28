@@ -97,14 +97,14 @@
     <!-- Hauptstruktur -->
     <main class="flex min-h-screen">
         <!-- Sidebar -->
-        <aside class="sidebar fixed top-0 left-0 w-64 h-screen bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300" id="sidebar">
+        <aside class="sidebar fixed top-0 left-0 w-64 h-screen bg-gray-50 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 overflow-y-auto z-40 transform -translate-x-full lg:translate-x-0" id="sidebar">
             <div class="p-6">
                 <div class="contents-header text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 font-roboto-mono tracking-wide">
                     Inhalt
                 </div>
                 <ul class="contents-list space-y-2">
                     <li><a href="#Einleitung" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Einleitung</a></li>
-                    <li><a href="#checkAlgo" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Prüfalgorithmus</a></li>
+                    <li><a href="#checkAlgo" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">CheckAlgo-Klasse</a></li>
                     <li><a href="#Übereinstimmung" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Übereinstimmungsprüfung</a></li>
                     <li><a href="#Beispiel" class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md transition-colors font-roboto-mono text-sm">Beispieldurchlauf</a></li>
                 </ul>
@@ -146,7 +146,7 @@
                     </a>
                     <a href="#checkAlgo" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
                         <span class="bg-green-500 w-6 h-6 rounded-full flex items-center justify-center text-white mr-2 text-xs font-bold">2</span>
-                        <span>Prüfalgorithmus</span>
+                        <span>CheckAlgo-Klasse</span>
                     </a>
                     <a href="#Übereinstimmung" class="flex items-center p-2 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700">
                         <span class="bg-yellow-500 w-6 h-6 rounded-full flex items-center justify-center text-white mr-2 text-xs font-bold">3</span>
@@ -196,91 +196,79 @@
             <!-- Abschnittstitel mit verbesserten Icons -->
             <section id="Einleitung" class="mb-10 scroll-mt-16">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
-                    <span class="bg-blue-500 w-8 h-8 rounded-lg flex flex items-center justify-center text-white mr-3 text-sm font-bold shadow">1</span>
+                    <span class="bg-blue-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold shadow">1</span>
                     Einleitung
                 </h2>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    Die Spielmechanik von Wordle basiert auf einem intelligenten Algorithmus zur Übereinstimmungsprüfung, der in der Klasse <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">CheckAlgo</code> implementiert ist. Diese Klasse ist das Herzstück des Spiels und entscheidet, wie gut die Eingabe des Spielers mit dem gesuchten Wort übereinstimmt.
+                </p>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Die Spielmechanik von Wordle basiert auf einem ausgeklügelten Algorithmus zur Übereinstimmungsprüfung...
+                    Der Algorithmus arbeitet in zwei Phasen: Zuerst werden exakte Übereinstimmungen (richtige Buchstaben an richtiger Position) gefunden und grün markiert. Anschließend werden Buchstaben identifiziert, die im Zielwort vorkommen, aber an der falschen Position stehen - diese werden gelb markiert. Alle anderen Buchstaben bleiben grau.
                 </p>
             </section>
 
-            <!-- Prüfalgorithmus -->
+            <!-- CheckAlgo-Klasse -->
             <section id="checkAlgo" class="mb-10 scroll-mt-8">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
                     <span class="bg-green-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">2</span>
-                    Prüfalgorithmus
+                    Die CheckAlgo-Klasse
                 </h2>
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Der Prüfalgorithmus besteht aus mehreren Schritten, um die Übereinstimmung zwischen dem eingegebenen Wort und dem Zielwort zu überprüfen...
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    Die <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">CheckAlgo</code>-Klasse wurde von Lennart und Moritz entwickelt und enthält die zentrale Methode <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">checkWord()</code>. Diese Methode nimmt zwei Parameter entgegen: das eingegebene Wort und das gesuchte Zielwort. Als Rückgabe erhält man ein Array von JavaFX-Farben, das für jede Buchstabenposition die entsprechende Farbe angibt.
                 </p>
 
-                <!-- Schritt 1: Umwandlung in Großbuchstaben -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 1: Umwandlung in Großbuchstaben
+                <!-- Methodensignatur -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Methodensignatur
                 </h3>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Eingabe normalisieren</h4>
+                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Methoden-Deklaration</h4>
                     </div>
                     <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">input = input.toUpperCase();</code></pre>
+                        <pre class="rounded-md p-4"><code class="language-java">public static Color[] checkWord(String input, String targetWord)</code></pre>
                     </div>
                 </div>
 
-                <!-- Schritt 2: Vergleich mit Wörtern aus der Wortliste -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 2: Vergleich mit Wörtern aus der Wortliste
+                <!-- Schritt 1: Vorbereitung -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Schritt 1: Eingabe vorbereiten
                 </h3>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Wort-Validierung</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">for (int i = 0; i < WOERTER.length; i++) {
-    if (input.equals(WOERTER[i].toUpperCase())) {
-        return true;
-    }
-}</code></pre>
-                    </div>
-                </div>
-
-                <!-- Schritt 3: Rückgabe falls kein Wort gefunden wurde -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 3: Rückgabe falls kein Wort gefunden wurde
-                </h3>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Validierungsergebnis</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">return false;</code></pre>
-                    </div>
-                </div>
-
-                <p class="text-gray-700 dark:text-gray-300 mt-4">
-                    Die Wortliste selbst wird beim Start aus einer Datei geladen und enthält 5-buchstabige Wörter:
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    Zuerst werden beide Wörter in Großbuchstaben umgewandelt, um eine einheitliche Vergleichsbasis zu schaffen. Anschließend wird die Länge des Zielworts ermittelt und die benötigten Arrays erstellt.
                 </p>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Wörterliste laden</h4>
+                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Eingabe normalisieren und Arrays erstellen</h4>
                     </div>
                     <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">File file = new File("wordlist.txt");
-            
-// Wenn die Datei nicht im aktuellen Verzeichnis ist, versuche im ressource-Verzeichnis
-if (!file.exists()) {
-    file = new File("ressource/wordlist.txt");
-}
+                        <pre class="rounded-md p-4"><code class="language-java">// Konvertierung der Eingabe und des Zielwortes in Großbuchstaben
+input = input.toUpperCase();
+targetWord = targetWord.toUpperCase();
 
-BufferedReader reader = new BufferedReader(new FileReader(file));
-String line;
+// Speicherung der Länge des Zielwortes
+int wordLength = targetWord.length();
 
-while ((line = reader.readLine()) != null) {
-    line = line.trim();
-    if (line.length() == 5) {
-        wordList.add(line);
-    }
-}</code></pre>
+// Array, das die Farben für die Übereinstimmungen speichert
+Color[] colors = new Color[wordLength];
+
+// Hilfsarray, um zu verfolgen, welche Buchstaben im Zielwort bereits verwendet wurden
+boolean[] usedInTargetWord = new boolean[wordLength];</code></pre>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <h4 class="text-blue-800 dark:text-blue-200 font-medium mb-1">Wichtige Arrays</h4>
+                            <p class="text-blue-700 dark:text-blue-300 text-sm">
+                                <strong>colors[]:</strong> Speichert für jede Position die Hintergrundfarbe<br>
+                                <strong>usedInTargetWord[]:</strong> Verhindert, dass ein Buchstabe mehrfach als "gelb" markiert wird
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -289,104 +277,98 @@ while ((line = reader.readLine()) != null) {
             <section id="Übereinstimmung" class="mb-10 scroll-mt-8">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
                     <span class="bg-yellow-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">3</span>
-                    Übereinstimmungsprüfung
+                    Übereinstimmungsprüfung in zwei Phasen
                 </h2>
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Nachdem festgestellt wurde, dass das eingegebene Wort gültig ist, wird überprüft, wie gut es mit dem Zielwort übereinstimmt. Dies geschieht in mehreren Schritten:
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                    Der Algorithmus arbeitet systematisch in zwei Durchgängen, um korrekte Ergebnisse zu gewährleisten und Dopplungen zu vermeiden.
                 </p>
 
-                <!-- Übereinstimmungsprüfung: Vorbereitung der Daten -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 1: Vorbereitung der Daten
+                <!-- Erster Durchgang: Exakte Übereinstimmungen -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Erster Durchgang: Exakte Übereinstimmungen finden
                 </h3>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Variablen initialisieren</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">eingabe = eingabe.toUpperCase();
-zielwort = zielwort.toUpperCase();
-
-int laenge = zielwort.length();
-
-Color[] farben = new Color[laenge];
-
-boolean[] zielwortBenutzt = new boolean[laenge];</code></pre>
-                    </div>
-                </div>
-
-                <p class="text-gray-700 dark:text-gray-300 mt-4">
-                    Im ersten Schritt werden beide Wörter in Großbuchstaben umgewandelt, die Länge des Zielworts gespeichert und zwei Arrays erstellt:
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    Im ersten Durchlauf werden alle Positionen überprüft, an denen der Buchstabe der Eingabe exakt mit dem Buchstaben des Zielworts übereinstimmt. Diese werden sofort grün markiert und als "verwendet" gekennzeichnet.
                 </p>
-                <ul class="list-disc ml-6 mb-4 text-gray-700 dark:text-gray-300">
-                    <li><code>farben</code>: Speichert für jede Position die entsprechende Farbe</li>
-                    <li><code>zielwortBenutzt</code>: Verfolgt, welche Buchstaben des Zielworts bereits zugeordnet wurden</li>
-                </ul>
-
-                <!-- Übereinstimmungsprüfung: Exakte Übereinstimmungen -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 2: Erste Überprüfung - Exakte Übereinstimmungen
-                </h3>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Prüfung auf genaue Positionen</h4>
+                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Erster Durchgang - Grüne Markierungen</h4>
                     </div>
                     <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">for (int i = 0; i < laenge; i++) {
-    if (i < eingabe.length() && eingabe.charAt(i) == zielwort.charAt(i)) {
-        farben[i] = Color.web("#6aaa64"); // Grün für richtige Position
-        zielwortBenutzt[i] = true;
+                        <pre class="rounded-md p-4"><code class="language-java">// Erster Durchgang: Finden von exakten Übereinstimmungen
+for (int i = 0; i < wordLength; i++) {
+    if (i < input.length() && input.charAt(i) == targetWord.charAt(i)) {
+        colors[i] = Color.web("#6aaa64"); // Grün für richtige Position
+        usedInTargetWord[i] = true;
     } else {
-        farben[i] = Color.web("#787c7e"); // Grau für falsche Buchstaben
+        colors[i] = Color.web("#787c7e"); // Grau als Standardfarbe
     }
 }</code></pre>
                     </div>
                 </div>
 
-                <!-- Übereinstimmungsprüfung: Buchstaben an falscher Position -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 3: Zweite Überprüfung - Buchstaben an falscher Position
+                <!-- Zweiter Durchgang: Buchstaben an falscher Position -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Zweiter Durchgang: Buchstaben an falscher Position
                 </h3>
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
+                    Im zweiten Durchlauf werden alle Positionen betrachtet, die noch nicht grün markiert sind. Für jeden Buchstaben wird geprüft, ob er irgendwo anders im Zielwort vorkommt und noch nicht verwendet wurde.
+                </p>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Prüfung auf vorhandene Buchstaben</h4>
+                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Zweiter Durchgang - Gelbe Markierungen</h4>
                     </div>
                     <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">for (int i = 0; i < eingabe.length() && i < laenge; i++) {
-    if (farben[i].equals(Color.web("#6aaa64"))) {
-        continue; // Bereits als korrekt markiert
+                        <pre class="rounded-md p-4"><code class="language-java">// Zweiter Durchgang: Finden von Buchstaben an falscher Position (gelb)
+for (int i = 0; i < input.length() && i < wordLength; i++) {
+    if (colors[i].equals(Color.web("#6aaa64"))) {
+        continue; // Bereits als korrekt markiert, überspringen
     }
-    
-    char buchstabe = eingabe.charAt(i);
-    boolean gefunden = false;
-    
+
+    char letters = input.charAt(i);
+    boolean lettersFound = false;
+
     // Suche nach diesem Buchstaben im Zielwort
-    for (int j = 0; j < laenge; j++) {
-        if (!zielwortBenutzt[j] && zielwort.charAt(j) == buchstabe) {
-            farben[i] = Color.web("#c9b458"); // Gelb
-            zielwortBenutzt[j] = true;
-            gefunden = true;
+    for (int j = 0; j < wordLength; j++) {
+        if (!usedInTargetWord[j] && targetWord.charAt(j) == letters) {
+            colors[i] = Color.web("#c9b458"); // Gelb für richtige Buchstaben an falscher Stelle
+            usedInTargetWord[j] = true;
+            lettersFound = true;
             break;
         }
     }
-    
-    if (!gefunden) {
-        farben[i] = Color.web("#787c7e"); // Grau
+
+    if (!lettersFound) {
+        colors[i] = Color.web("#787c7e"); // Grau für nicht vorkommende Buchstaben
     }
 }</code></pre>
                     </div>
                 </div>
 
-                <!-- Übereinstimmungsprüfung: Rückgabe des Farben-Arrays -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Schritt 4: Rückgabe des Farben-Arrays
+                <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-yellow-600 dark:text-yellow-400 mt-0.5 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                        <div>
+                            <h4 class="text-yellow-800 dark:text-yellow-200 font-medium mb-1">Warum zwei Durchgänge?</h4>
+                            <p class="text-yellow-700 dark:text-yellow-300 text-sm">
+                                Durch die Trennung in zwei Phasen wird verhindert, dass ein Buchstabe fälschlicherweise als "gelb" markiert wird, obwohl er an anderer Stelle bereits korrekt (grün) steht. Das <code>usedInTargetWord</code> Array sorgt dafür, dass jeder Buchstabe des Zielworts nur einmal zugeordnet wird.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rückgabe -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Rückgabe des Ergebnisses
                 </h3>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Ergebnis zurückgeben</h4>
+                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Farben-Array zurückgeben</h4>
                     </div>
                     <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">return farben;</code></pre>
+                        <pre class="rounded-md p-4"><code class="language-java">return colors;</code></pre>
                     </div>
                 </div>
             </section>
@@ -395,212 +377,177 @@ boolean[] zielwortBenutzt = new boolean[laenge];</code></pre>
             <section id="Beispiel" class="mb-10 scroll-mt-8">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center">
                     <span class="bg-purple-500 w-8 h-8 rounded-lg flex items-center justify-center text-white mr-3 text-sm font-bold">4</span>
-                    Beispieldurchlauf
+                    Beispieldurchlauf: "TEICH" und "FISCH"
                 </h2>
-                <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Um den Algorithmus besser zu verstehen, analysieren wir einen konkreten Fall:
+                <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                    Um den Algorithmus besser zu verstehen, analysieren wir einen konkreten Fall Schritt für Schritt:
                 </p>
 
-                <ul class="list-disc ml-6 mb-4 text-gray-700 dark:text-gray-300">
-                    <li>Zielwort: "KATZE"</li>
-                    <li>Eingabe: "TASSE"</li>
-                </ul>
+                <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 mb-6 border border-gray-200 dark:border-gray-700">
+                    <div class="grid grid-cols-2 gap-4 text-lg font-mono">
+                        <div>
+                            <span class="text-gray-600 dark:text-gray-400">Eingabe:</span> 
+                            <span class="font-bold">TEICH</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600 dark:text-gray-400">Zielwort:</span> 
+                            <span class="font-bold">FISCH</span>
+                        </div>
+                    </div>
+                </div>
 
-                <!-- Beispieldurchlauf: Vorbereitung -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Vorbereitung
+                <!-- Vorbereitung -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Schritt 1: Vorbereitung
                 </h3>
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
                     <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Beispiel-Initialisierung</h4>
+                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Initialisierung der Variablen</h4>
                     </div>
                     <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">eingabe = "TASSE";
-zielwort = "KATZE";
-laenge = 5;
-farben = [null, null, null, null, null];
-zielwortBenutzt = [false, false, false, false, false];</code></pre>
+                        <pre class="rounded-md p-4"><code class="language-java">input = "TEICH";
+targetWord = "FISCH";
+wordLength = 5;
+colors = [null, null, null, null, null];
+usedInTargetWord = [false, false, false, false, false];</code></pre>
                     </div>
                 </div>
 
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Erster Durchgang: Exakte Übereinstimmungen
+                <!-- Erster Durchgang -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Schritt 2: Erster Durchgang - Exakte Übereinstimmungen
                 </h3>
-
-                <p>Position 0: 'T' in "TASSE" vs. 'K' in "KATZE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 0 vergleichen</h4>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 0: 'T' und 'F'</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">T ≠ F → Keine Übereinstimmung</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[0] = #787c7e (grau)</code>
                     </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 0:
-if ('T' == 'K') { // falsch
-    // Wird nicht ausgeführt
-} else {
-    farben[0] = Color.web("#787c7e"); // Grau
-}</code></pre>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 1: 'E' und 'I'</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">E ≠ I → Keine Übereinstimmung</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[0] = #787c7e (grau)</code>
                     </div>
-                </div>
-
-                <p>Position 1: 'A' in "TASSE" vs. 'A' in "KATZE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 1 vergleichen</h4>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 2: 'I' und 'S'</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">I ≠ S → Keine Übereinstimmung</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[0] = #787c7e (grau)</code>
                     </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 1:
-if ('A' == 'A') { // wahr
-    farben[1] = Color.web("#6aaa64"); // Grün
-    zielwortBenutzt[1] = true;
-}</code></pre>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 3: 'C' und 'C'</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">C = C → Exakte Übereinstimmung</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[3] = #6aaa64 (grün), usedInTargetWord[3] = true</code>
                     </div>
-                </div>
-
-                <p>Position 2: 'S' in "TASSE" vs. 'T' in "KATZE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 2 vergleichen</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 2:
-if ('S' == 'T') { // falsch
-    // Wird nicht ausgeführt
-} else {
-    farben[2] = Color.web("#787c7e"); // Grau
-}</code></pre>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 4: 'H' und 'H'</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">H = H → Exakte Übereinstimmung</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[4] = #6aaa64 (grün), usedInTargetWord[4] = true</code>
                     </div>
                 </div>
 
-                <p>Position 3: 'S' in "TASSE" vs. 'Z' in "KATZE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 3 vergleichen</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 3:
-if ('S' == 'Z') { // falsch
-    // Wird nicht ausgeführt
-} else {
-    farben[3] = Color.web("#787c7e"); // Grau
-}</code></pre>
+                <div class="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
+                    <h4 class="text-blue-800 dark:text-blue-200 font-medium mb-2">Stand nach erstem Durchgang:</h4>
+                    <div class="font-mono text-sm">
+                        <div>colors = [grau, grau, grau, grün, grün]</div>
+                        <div>usedInTargetWord = [false, false, false, true, true]</div>
                     </div>
                 </div>
 
-                <p>Position 4: 'E' in "TASSE" vs. 'E' in "KATZE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 4 vergleichen</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 4:
-if ('E' == 'E') { // wahr
-    farben[4] = Color.web("#6aaa64"); // Grün
-    zielwortBenutzt[4] = true;
-}</code></pre>
-                    </div>
-                </div>
-
-                <p>Nach dem ersten Durchgang:</p>
-                <pre><code class="language-java">farben = [grau, grün, grau, grau, grün];
-zielwortBenutzt = [false, true, false, false, true];</code></pre>
-
-                <!-- Zweiter Durchgang: Buchstaben an falscher Position -->
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Zweiter Durchgang: Buchstaben an falscher Position
+                <!-- Zweiter Durchgang -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Schritt 3: Zweiter Durchgang - Buchstaben an falscher Position
                 </h3>
-
-                <p>Position 0: 'T' in "TASSE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 0 vergleichen</h4>
+                
+                <div class="space-y-4 mb-6">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 0: 'T' prüfen</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Ist noch nicht grün → Suche 'T' in "FISCH"</p>
+                        <div class="text-sm bg-gray-100 dark:bg-gray-700 p-2 rounded mb-2 font-mono">
+                            <div>Position 0: 'F' ≠ 'T'</div>
+                            <div>Position 1: 'I' ≠ 'T'</div>
+                            <div>Position 2: 'S' ≠ 'T'</div>
+                            <div>Position 3: 'C' ≠ 'T'</div>
+                            <div>Position 4: 'H' ≠ 'T'</div>
+                        </div>
+                        <p class="text-sm">Ergebnis: 'T' kommt in "FISCH" nicht vor</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[0] bleibt #787c7e (grau)</code>
                     </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 0:
-if (farben[0].equals(Color.web("#6aaa64"))) { // falsch, ist grau
-    // Wird nicht ausgeführt
-}
 
-char buchstabe = 'T';
-boolean gefunden = false;
-
-// Suche nach 'T' im Zielwort "KATZE"
-for (int j = 0; j < 5; j++) {
-    // j = 0: 'K' != 'T' und nicht benutzt -> weiter
-    // j = 1: 'A' != 'T' und bereits benutzt -> weiter
-    // j = 2: 'T' == 'T' und nicht benutzt -> Treffer!
-    if (!zielwortBenutzt[2] && zielwort.charAt(2) == 'T') {
-        farben[0] = Color.web("#c9b458"); // Gelb
-        zielwortBenutzt[2] = true;
-        gefunden = true;
-        break;
-    }
-}</code></pre>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 1: 'E' prüfen</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Ist noch nicht grün → Suche 'T' in "FISCH"</p>
+                        <div class="text-sm bg-gray-100 dark:bg-gray-700 p-2 rounded mb-2 font-mono">
+                            <div>Position 0: 'F' ≠ 'E'</div>
+                            <div>Position 1: 'I' ≠ 'E'</div>
+                            <div>Position 2: 'S' ≠ 'E'</div>
+                            <div>Position 3: 'C' ≠ 'E'</div>
+                            <div>Position 4: 'H' ≠ 'E'</div>
+                        </div>
+                        <p class="text-sm">Ergebnis: 'E' kommt in "FISCH" nicht vor</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[1] bleibt #787c7e (grau)</code>
                     </div>
-                </div>
 
-                <p>Position 1: 'A' in "TASSE" - bereits grün, überspringen</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 1 überspringen</h4>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Position 2: 'I' prüfen</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Ist noch nicht grün → Suche 'I' in "FISCH"</p>
+                        <div class="text-sm bg-gray-100 dark:bg-gray-700 p-2 rounded mb-2 font-mono">
+                            <div>Position 0: 'F' ≠ 'I'</div>
+                            <div>Position 1: 'I' = 'I' → Buchstabe kommt an Position 1 vor </div>
+                            <div>Position 2: 'S' ≠ 'I'</div>
+                            <div>Position 3: 'C' ≠ 'I'</div>
+                            <div>Position 4: 'H' ≠ 'I'</div>
+                        </div>
+                        <p class="text-sm">Ergebnis: 'I' kommt in "FISCH" vor</p>
+                        <code class="text-sm bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">colors[2] wird zu #c9b458 (gelb)</code>
                     </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 1:
-if (farben[1].equals(Color.web("#6aaa64"))) { // wahr, ist grün
-    continue; // Überspringen
-}</code></pre>
-                    </div>
-                </div>
-
-                <p>Position 2: 'S' in "TASSE"</p>
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 overflow-hidden">
-                    <div class="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
-                        <h4 class="text-md font-medium text-gray-700 dark:text-gray-300">Position 2 vergleichen</h4>
-                    </div>
-                    <div class="p-4">
-                        <pre class=" rounded-md p-4"><code class="language-java">// Für i = 2:
-if (farben[2].equals(Color.web("#6aaa64"))) { // falsch, ist grau
-    // Wird nicht ausgeführt
-}
-
-char buchstabe = 'S';
-boolean gefunden = false;
-
-// Suche nach 'S' im Zielwort "KATZE"
-for (int j = 0; j < 5; j++) {
-    // j = 0: 'K' != 'S' und nicht benutzt -> weiter
-    // j = 1: 'A' != 'S' und bereits benutzt -> weiter
-    // j = 2: 'T' != 'S' und bereits benutzt -> weiter
-    // j = 3: 'Z' != 'S' und nicht benutzt -> weiter
-    // j = 4: 'E' != 'S' und bereits benutzt -> weiter
-    // Keine Übereinstimmung gefunden
-}
-
-// Nach der Schleife:
-if (!gefunden) {
-    farben[2] = Color.web("#787c7e"); // Bleibt grau
-}</code></pre>
+                    
+                    <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                        <h4 class="font-semibold mb-2">Positionen 3-4: Bereits grün</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Diese Positionen werden übersprungen, da sie bereits als korrekt markiert sind.</p>
                     </div>
                 </div>
 
-                <p>Position 3: 'S' in "TASSE" - gleiche Prüfung wie Position 2, bleibt grau</p>
-                <p>Position 4: 'E' in "TASSE" - bereits grün, überspringen</p>
-
-                <p>Nach dem zweiten Durchgang:</p>
-                <pre><code class="language-java">farben = [gelb, grün, grau, grau, grün];</code></pre>
-
-                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-4 mb-3">
-                    Ergebnis
+                <!-- Endergebnis -->
+                <h3 class="text-2xl font-semibold text-gray-900 dark:text-gray-100 mt-6 mb-3">
+                    Endergebnis
                 </h3>
-                <p>
-                    Das endgültige Farben-Array zeigt dem Spieler:
-                </p>
-                <ul class="list-disc ml-6 mb-4 text-gray-700 dark:text-gray-300">
-                    <li>'T' an Position 0: <span style="color:#c9b458">gelb</span> - Kommt im Zielwort vor, aber an anderer Stelle</li>
-                    <li>'A' an Position 1: <span style="color:#6aaa64">grün</span> - Korrekt an richtiger Position</li>
-                    <li>'S' an Position 2: <span style="color:#787c7e">grau</span> - Kommt im Zielwort nicht vor</li>
-                    <li>'S' an Position 3: <span style="color:#787c7e">grau</span> - Kommt im Zielwort nicht vor</li>
-                    <li>'E' an Position 4: <span style="color:#6aaa64">grün</span> - Korrekt an richtiger Position</li>
-                </ul>
+                
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
+                    <h4 class="font-semibold mb-4">Visuelles Ergebnis:</h4>
+                    <div class="grid grid-cols-5 gap-1 mb-4">
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-gray-500 text-white font-bold text-xl flex items-center justify-center rounded">T</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-gray-500 text-white font-bold text-xl flex items-center justify-center rounded">E</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-yellow-600 text-white font-bold text-xl flex items-center justify-center rounded">I</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-green-500 text-white font-bold text-xl flex items-center justify-center rounded">C</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-12 h-12 bg-green-500 text-white font-bold text-xl flex items-center justify-center rounded">H</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded p-3">
+                        <h5 class="font-medium mb-2">Interpretation für den Spieler:</h5>
+                        <ul class="text-sm space-y-1">
+                            <li><span class="inline-block w-3 h-3 bg-gray-500 rounded mr-2"></span>T: Kommt im Zielwort nicht vor</li>
+                            <li><span class="inline-block w-3 h-3 bg-gray-500 rounded mr-2"></span>E: Kommt im Zielwort nicht vor</li>
+                            <li><span class="inline-block w-3 h-3 bg-yellow-600 rounded mr-2"></span>I: Falsch an Position</li>
+                            <li><span class="inline-block w-3 h-3 bg-green-500 rounded mr-2"></span>C: Richtig an Position 3</li>
+                            <li><span class="inline-block w-3 h-3 bg-green-500 rounded mr-2"></span>H: Richtig an Position 4</li>
+                        </ul>
+                    </div>
+                </div>
             </section>
         </div>
     </main>
@@ -629,7 +576,7 @@ if (!gefunden) {
 
         // Mobile sidebar toggle
         const sidebarToggle = document.getElementById('sidebar-toggle');
-        const sidebar = document.getElementById('sidebar');
+        const sidebar = document.querySelector('.sidebar');
         const sidebarOverlay = document.getElementById('sidebar-overlay');
 
         if (sidebarToggle && sidebar && sidebarOverlay) {
@@ -643,6 +590,46 @@ if (!gefunden) {
                 sidebarOverlay.classList.add('hidden');
             });
         }
+
+        // Smooth scrolling für Anker-Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active link highlighting
+        const observerOptions = {
+            root: null,
+            rootMargin: '-20% 0px -70% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.contents-list a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            observer.observe(section);
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             const backToTopButton = document.getElementById('back-to-top');
@@ -677,7 +664,7 @@ if (!gefunden) {
 
     <!-- "Zurück nach oben" Button für lange Seiten -->
     <div class="fixed bottom-8 right-8">
-        <button id="back-to-top" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white shadow-lg transition-all hover:shadow-xl">
+        <button id="back-to-top" class="opacity-0 invisible w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white shadow-lg transition-all hover:shadow-xl">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
             </svg>
