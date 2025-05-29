@@ -39,6 +39,39 @@
             color: #f8f8f2;
             background: transparent;
         }
+
+        /* Inline code styling */
+        code {
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875em;
+            font-weight: 500;
+        }
+
+        .dark code {
+            background-color: #374151;
+            color: #f94fff;
+        }
+
+        /* Specific styling for code within paragraphs, lists */
+        p code,
+        ul code,
+        ol code,
+        li code {
+            background-color: #c7cad1;
+            color: #00806f;
+        }
+
+        .dark p code,
+        .dark ul code,
+        .dark ol code,
+        .dark li code {
+            background-color: #4b5563;
+            color: #f28afc;
+        }
         
         .dark .hljs-keyword { color: #ff79c6; }
         .dark .hljs-string { color: #f1fa8c; }
@@ -214,7 +247,7 @@
                     Die CheckAlgo-Klasse
                 </h2>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                    Die <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">CheckAlgo</code>-Klasse wurde von Lennart und Moritz entwickelt und enthält die zentrale Methode <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">checkWord()</code>. Diese Methode nimmt zwei Parameter entgegen: das eingegebene Wort und das gesuchte Zielwort. Als Rückgabe erhält man ein Array von JavaFX-Farben, das für jede Buchstabenposition die entsprechende Farbe angibt.
+                    Die <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">CheckAlgo</code>-Klasse enthält die zentrale Methode <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">checkWord()</code>. Diese Methode nimmt zwei Parameter entgegen: das eingegebene Wort und das gesuchte Zielwort. Als Rückgabe erhält man ein Array von JavaFX-Farben, das für jede Buchstabenposition die entsprechende Farbe angibt.
                 </p>
 
                 <!-- Methodensignatur -->
@@ -519,7 +552,7 @@ usedInTargetWord = [false, false, false, false, false];</code></pre>
                 
                 <div class="bg-white dark:bg-gray-800 rounded-lg shadow border border-gray-200 dark:border-gray-700 mb-6 p-6">
                     <h4 class="font-semibold mb-4">Visuelles Ergebnis:</h4>
-                    <div class="grid grid-cols-5 gap-1 mb-4">
+                    <div class="grid grid-cols-5 mb-4 w-1/4">
                         <div class="text-center">
                             <div class="w-12 h-12 bg-gray-500 text-white font-bold text-xl flex items-center justify-center rounded">T</div>
                         </div>
