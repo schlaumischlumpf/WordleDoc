@@ -333,10 +333,16 @@ boolean[] usedInTargetWord = new boolean[wordLength];</code></pre>
                     <div class="p-4">
                         <pre class="rounded-md p-4"><code class="language-java">// Erster Durchgang: Finden von exakten Übereinstimmungen
 for (int i = 0; i < wordLength; i++) {
+    // Prüfe, ob die Position i innerhalb der Eingabelänge liegt
+    // und ob der Buchstabe an Position i in beiden Wörtern identisch ist
     if (i < input.length() && input.charAt(i) == targetWord.charAt(i)) {
+        // Exakte Übereinstimmung gefunden: Buchstabe ist richtig und an korrekter Position
         colors[i] = Color.web("#6aaa64"); // Grün für richtige Position
+        // Markiere diese Position im Zielwort als bereits verwendet
         usedInTargetWord[i] = true;
     } else {
+        // Keine exakte Übereinstimmung: Setze zunächst auf grau
+        // (kann im zweiten Durchgang noch auf gelb geändert werden)
         colors[i] = Color.web("#787c7e"); // Grau als Standardfarbe
     }
 }</code></pre>
@@ -357,23 +363,32 @@ for (int i = 0; i < wordLength; i++) {
                     <div class="p-4">
                         <pre class="rounded-md p-4"><code class="language-java">// Zweiter Durchgang: Finden von Buchstaben an falscher Position (gelb)
 for (int i = 0; i < input.length() && i < wordLength; i++) {
+    // Überspringe Positionen, die bereits als korrekt (grün) markiert wurden
     if (colors[i].equals(Color.web("#6aaa64"))) {
         continue; // Bereits als korrekt markiert, überspringen
     }
 
+    // Hole den aktuellen Buchstaben aus der Eingabe
     char letters = input.charAt(i);
     boolean lettersFound = false;
 
     // Suche nach diesem Buchstaben im Zielwort
     for (int j = 0; j < wordLength; j++) {
+        // Prüfe, ob die Position im Zielwort noch nicht verwendet wurde
+        // und ob der Buchstabe an dieser Position mit dem gesuchten übereinstimmt
         if (!usedInTargetWord[j] && targetWord.charAt(j) == letters) {
+            // Markiere den Buchstaben als gelb (richtige Buchstabe, falsche Position)
             colors[i] = Color.web("#c9b458"); // Gelb für richtige Buchstaben an falscher Stelle
+            // Markiere diese Position im Zielwort als verwendet
             usedInTargetWord[j] = true;
+            // Setze Flag, dass der Buchstabe gefunden wurde
             lettersFound = true;
+            // Verlasse die innere Schleife, da der Buchstabe zugeordnet wurde
             break;
         }
     }
 
+    // Falls der Buchstabe nicht im Zielwort gefunden wurde
     if (!lettersFound) {
         colors[i] = Color.web("#787c7e"); // Grau für nicht vorkommende Buchstaben
     }
